@@ -33,20 +33,20 @@ Sequence solvers were applied in the order listed, based on assumed reliability.
 Take the difference between each adjacent term in the sequence, if the differences are all the same, the next term can be predicted. It's a special case of the recurrence relation (and presumably produces redundant predictions when both are used).
 
 For example: 
-```
-Sequence = [2, 4, 6, 8, 10]
-First differences = [4-2, 6-4, 8-6, 10-8] = [2, 2, 2, 2]
+```R
+sequence = [2, 4, 6, 8, 10]
+firstDfferences = [4-2, 6-4, 8-6, 10-8] = [2, 2, 2, 2]
 
-Next term = 10 + 2 = 12
+nextTerm = 10 + 2 = 12
 ```
 
 If the differences aren't the same, continue down: 
-``` 
-Sequence = [2, 4, 7, 11, 16] 
-1st diffs = [4-2, 7-4, 11-7, 16-11] = [2, 3, 4, 5] 
-2nd diffs = [3-2, 4-3, 5-4] = [1, 1, 1]
+```R 
+sequence = [2, 4, 7, 11, 16] 
+firstDiffs = [4-2, 7-4, 11-7, 16-11] = [2, 3, 4, 5] 
+secondDiffs = [3-2, 4-3, 5-4] = [1, 1, 1]
 
-Next term = 16 + 5 + 1 = 22
+nextTerm = 16 + 5 + 1 = 22
 ```
 
 Each level of differences decreases in length by 1, and false positives are a risk when too few values are available at level to be sure the level is constant.
@@ -55,11 +55,11 @@ Each level of differences decreases in length by 1, and false positives are a ri
 An extension of the method of common differences is to take differences over a step size > 1, instead of from only adjacent terms.
 
 For example, with a step of 2: 
-```
-Sequence = [2, 6, 8, 12] 
-1st diffs = [8-2, 12-6] = [6, 6]
+```R
+sequence = [2, 6, 8, 12] 
+firstDiffs = [8-2, 12-6] = [6, 6]
 
-Next term  = ((n+1)-step) + diff = 8 + 6 = 14
+nextTerm  = ((n+1)-step) + diff = 8 + 6 = 14
 ```
 
 In this case, the length of each level reduces by the step size, making false positives are a greater risk with this approach. "Dodgy" solutions were ones that were possible solutions, but were shorter than some threshold. If no solutions were proposed by pattern search or pattern search on difference levels, the dodgy solution was used.
@@ -105,5 +105,5 @@ Solvers were applied on the basis of assumed reliability - this was measured (ro
 ### Sequence classification
 It's also likely that solver reliability varies as a function of sequence class. In fact, a sensible classification mechanism for a sequence is the best approach to predict the next term (although this is outside the scope of the Kaggle challenge). It might be sensible to determine certain basic properties of sequences first, then cluster the sequences in an unsupervised fashion. Solver reliability could then be assessed per-cluster and solvers applied in a guided fashion depending on the clusters properties. See this **classifyingSequences.ipynb** / [here](https://www.kaggle.com/garethjns/integer-sequence-learning/classifying-tagging-sequences) for further discussion and examples.
 
-[Sequence classification](images/Figure2.png "Logo Title Text 1")
+![Sequence classifcation](Images/figure2.png)
 
